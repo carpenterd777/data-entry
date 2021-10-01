@@ -2,7 +2,6 @@ astroid==2.8.0
 black==21.9b0
 click==8.0.1
 isort==5.9.3
-keyboard==0.13.5
 lazy-object-proxy==1.6.0
 mccabe==0.6.1
 mypy-extensions==0.4.3
