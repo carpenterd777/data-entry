@@ -19,7 +19,7 @@ jobs:
             - name: Create distributable release
               run: | 
                 pyinstaller --onefile __main__.py
-                mv ./dist ./data-entry
+                mv ./dist/__main__ ./dist/data-entry
 
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
