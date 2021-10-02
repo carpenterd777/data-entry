@@ -94,7 +94,7 @@ class CommonData:
             self._address_field_names,
             self._city_field_names,
             self._zip_field_names,
-            self._state_field_names
+            self._state_field_names,
         ]
 
         predicted_fields = None

@@ -226,6 +226,7 @@ def _address_instruct(data: CommonData) -> None:
             )
             _wait_for_input()
 
+
 def _bio2_instruct() -> None:
     directions = """
     Move to the tab "Bio2". At the "Constituent Codes" table at the
@@ -233,6 +234,7 @@ def _bio2_instruct() -> None:
     """
     printt(fix_multiline(directions))
     _wait_for_input()
+
 
 def _addressee_and_salutation_instruct() -> None:
     directions = """
@@ -242,6 +244,7 @@ def _addressee_and_salutation_instruct() -> None:
     """
     printt(fix_multiline(directions))
     _wait_for_input()
+
 
 def _relationships_instruct(data: CommonData) -> None:
     directions = """
@@ -266,6 +269,7 @@ def _relationships_instruct(data: CommonData) -> None:
     printt(data.get_field_like(CommonFieldNames.ZIP), style="bold blue")
 
     _wait_for_input()
+
 
 def _wait_for_input() -> None:
     """
