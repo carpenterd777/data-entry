@@ -1,5 +1,5 @@
 """
-Name        : raiser.py
+Name        : __main__.py
 Author      : David Carpenter
 Date        : 2021-10-01
 Description : A program to assist me in entering data into a database.
