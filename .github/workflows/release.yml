@@ -29,12 +29,10 @@ jobs:
                 title: "linux"
                 files: |
                   ./dist/data-entry
-
-    release-windows:
         runs-on: windows-latest
         steps:
             - uses: actions/checkout@v2
-             
+              
             - name: Install pyinstaller
               run: pip3 install pyinstaller
 
