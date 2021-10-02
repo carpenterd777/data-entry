@@ -8,9 +8,8 @@
             "name": "Python Entry Point",
             "type": "python",
             "request": "launch",
-            "program": "./dataentry.py",
+            "program": "./__main__.py",
             "console": "integratedTerminal",
-            "args": ["./wrestling_contacts.csv"]
         }
     ]
 }
