@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-    release:
+    release-linux:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -26,6 +26,28 @@ jobs:
                 repo_token: "${{ secrets.GITHUB_TOKEN }}"
                 automatic_release_tag: "latest"
                 prerelease: true
-                title: "latest"
+                title: "linux"
+                files: |
+                  ./dist/data-entry
+
+    release-windows:
+        runs-on: windows-latest
+        steps:
+            - uses: actions/checkout@v2
+             
+            - name: Install pyinstaller
+              run: pip3 install pyinstaller
+
+            - name: Create distributable release
+              run: | 
+                pyinstaller __main__.py
+                mv ./dist ./data-entry
+
+            - uses: "marvinpinto/action-automatic-releases@latest"
+              with:
+                repo_token: "${{ secrets.GITHUB_TOKEN }}"
+                automatic_release_tag: "latest"
+                prerelease: true
+                title: "windows"
                 files: |
                   ./dist/data-entry
