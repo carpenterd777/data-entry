@@ -73,6 +73,8 @@ class CommonData:
             if field_name in self.data:
                 return True
 
+        return False
+
     def get_field_like(self, field: str) -> str:
         """
         Returns the field that the data has
@@ -82,6 +84,8 @@ class CommonData:
         for field_name in self._get_field_name_list(field):
             if field_name in self.data:
                 return self.data[field_name]
+
+        raise Exception("got field name that is not yet handled by CommonData")
 
     def _get_field_name_list(self, field: str) -> List[str]:
         # find the array where the given field is entry 0
