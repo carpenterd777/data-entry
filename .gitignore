@@ -1,3 +1,5 @@
 __pycache__
 ./prepare.py
 *.csv
+dist
+*.spec
