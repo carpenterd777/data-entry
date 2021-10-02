@@ -49,7 +49,6 @@ def _instruct_one(data: CommonData) -> None:
     printt("Current entry:\n")
     print_json(json.dumps(data.data))
     _wait_for_input()
-
     _last_name_instruct(data)
     _first_name_instruct(data)
     _email_address_instruct(data)
@@ -57,6 +56,7 @@ def _instruct_one(data: CommonData) -> None:
     _address_instruct(data)
     _bio2_instruct()
     _addressee_and_salutation_instruct()
+    _relationships_instruct(data)
 
 
 def _last_name_instruct(data: CommonData) -> None:
@@ -241,6 +241,30 @@ def _addressee_and_salutation_instruct() -> None:
     pick the fifth option provided from the drop-down.
     """
     printt(fix_multiline(directions))
+    _wait_for_input()
+
+def _relationships_instruct(data: CommonData) -> None:
+    directions = """
+    Move to the tab "Relationships". Click the "Individuals" button in the column on 
+    the left. Above that, click "New Individual Relationship". In the dialog box that
+    appears, find the field labeled "Last Name". Next to this field is button with a binoculars
+    icon, click this. This will open a dialog box to match students to their parents. Enter the last
+    name of the parent.
+    
+    Students will only be matches as a child of a parent if both their last name and address
+    match the parent.
+    
+    Only double click on a match to link the student if the above criteria are met.\n
+    """
+    printt(fix_multiline(directions))
+    printt("Last Name: ", end="")
+    printt(data.get_field_like(CommonFieldNames.LAST_NAME), style="bold blue")
+    printt("Address: ", end="")
+    printt(data.get_field_like(CommonFieldNames.ADDRESS), style="bold blue", end=", ")
+    printt(data.get_field_like(CommonFieldNames.CITY), style="bold blue", end=", ")
+    printt(data.get_field_like(CommonFieldNames.STATE), style="bold blue", end=", ")
+    printt(data.get_field_like(CommonFieldNames.ZIP), style="bold blue")
+
     _wait_for_input()
 
 def _wait_for_input() -> None:
