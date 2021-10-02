@@ -8,27 +8,7 @@ on:
 
 jobs:
 
-    release-linux:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-             
-            - name: Install pyinstaller
-              run: pip3 install pyinstaller
-
-            - name: Create distributable release
-              run: | 
-                pyinstaller --onefile __main__.py
-                mv ./dist/__main__ ./dist/data-entry
-
-            - uses: "marvinpinto/action-automatic-releases@latest"
-              with:
-                repo_token: "${{ secrets.GITHUB_TOKEN }}"
-                automatic_release_tag: "latest"
-                prerelease: true
-                title: "linux"
-                files: |
-                  ./dist/data-entry
+    release:
         runs-on: windows-latest
         steps:
             - uses: actions/checkout@v2
@@ -38,8 +18,8 @@ jobs:
 
             - name: Create distributable release
               run: | 
-                pyinstaller __main__.py
-                mv ./dist ./data-entry
+                pyinstaller --onefile __main__.py
+                mv ./dist/__main__ ./dist/data-entry
 
             - uses: "marvinpinto/action-automatic-releases@latest"
               with:
