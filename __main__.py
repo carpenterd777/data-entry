@@ -54,7 +54,7 @@ def main() -> None:
     parser.add_argument("path", type=str, help="path to the csv file containing info")
     parser.add_argument(
         "--page_only",
-        type=bool,
+        action="store_true",
         help="only page through the input data, no instructions",
     )
     args = parser.parse_args()
