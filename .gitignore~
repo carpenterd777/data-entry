@@ -1,0 +1,13 @@
+__pycache__
+./prepare.py
+*.csv
+dist
+build
+*.spec
+<<<<<<< HEAD
+*~
+.venv
+*.swp
+=======
+.venv
+>>>>>>> 8eb4664c61c7f8fb066ecb0e7c2258b47c76bda3
