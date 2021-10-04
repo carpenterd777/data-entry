@@ -11,6 +11,7 @@ from rich import print_json
 from rich.console import Console
 
 from commondata import CommonData, CommonFieldNames
+from input_function import wait_for_input, wait_for_confirmation
 
 
 def printt(*values, style=None, end="\n") -> None:
@@ -48,7 +49,7 @@ def _instruct_one(data: CommonData) -> None:
 
     printt("Current entry:\n")
     print_json(json.dumps(data.data))
-    _wait_for_input()
+    wait_for_input()
     _last_name_instruct(data)
     _first_name_instruct(data)
     _email_address_instruct(data)
@@ -66,7 +67,7 @@ def _last_name_instruct(data: CommonData) -> None:
             data.get_field_like(CommonFieldNames.LAST_NAME), style="bold blue", end=""
         )
         printt(' in the blue "Last name" box under Biographical')
-        _wait_for_input()
+        wait_for_input()
 
 
 def _first_name_instruct(data: CommonData) -> None:
@@ -76,14 +77,14 @@ def _first_name_instruct(data: CommonData) -> None:
             data.get_field_like(CommonFieldNames.FIRST_NAME), style="bold blue", end=""
         )
         printt(' in the blue "First name" box under Biographical')
-        _wait_for_input()
+        wait_for_input()
 
         printt('Add a title in the "Titles" box\n')
         printt("First name was: ", end="")
         printt(
             data.get_field_like(CommonFieldNames.FIRST_NAME), style="bold blue", end=""
         )
-        _wait_for_input()
+        wait_for_input()
 
         printt(
             'Add a nickname in the "Nickname" box that is the same as their first name\n'
@@ -92,14 +93,14 @@ def _first_name_instruct(data: CommonData) -> None:
         printt(
             data.get_field_like(CommonFieldNames.FIRST_NAME), style="bold blue", end=""
         )
-        _wait_for_input()
+        wait_for_input()
 
         printt("Add their gender\n")
         printt("First name was: ", end="")
         printt(
             data.get_field_like(CommonFieldNames.FIRST_NAME), style="bold blue", end=""
         )
-        _wait_for_input()
+        wait_for_input()
 
 
 def _email_address_instruct(data: CommonData) -> None:
@@ -116,7 +117,7 @@ def _email_address_instruct(data: CommonData) -> None:
             style="bold blue",
             end="",
         )
-        _wait_for_input()
+        wait_for_input()
 
 
 def _phone_number_instruct(data: CommonData) -> None:
@@ -162,7 +163,7 @@ def _phone_number_instruct(data: CommonData) -> None:
             printt("Cell number: ", end="")
             printt(cell_number + "\n", style="bold blue")
 
-        _wait_for_input()
+        wait_for_input()
 
 
 def _address_instruct(data: CommonData) -> None:
@@ -176,13 +177,13 @@ def _address_instruct(data: CommonData) -> None:
             "Address: " + data.get_field_like(CommonFieldNames.ADDRESS) + "\n",
             style="bold blue",
         )
-        _wait_for_input()
+        wait_for_input()
     else:
         directions = """
         Click "no valid address" in the bottom right corner.
         """
         printt(fix_multiline(directions))
-        _wait_for_input()
+        wait_for_input()
 
     address_accelerated = False
     if data.has_field_like(CommonFieldNames.CITY):
@@ -200,7 +201,7 @@ def _address_instruct(data: CommonData) -> None:
         Enter Y if the address was accelerated, otherwise enter any other key.
         """
         printt(fix_multiline(directions))
-        address_accelerated = _wait_for_confirmation()
+        address_accelerated = wait_for_confirmation()
 
     if not address_accelerated:
         if data.has_field_like(CommonFieldNames.STATE):
@@ -213,7 +214,7 @@ def _address_instruct(data: CommonData) -> None:
                 "State: " + data.get_field_like(CommonFieldNames.CITY),
                 style="bold blue",
             )
-            _wait_for_input()
+            wait_for_input()
 
         if data.has_field_like(CommonFieldNames.ZIP):
             directions = """
@@ -224,7 +225,7 @@ def _address_instruct(data: CommonData) -> None:
             printt(
                 "State: " + data.get_field_like(CommonFieldNames.ZIP), style="bold blue"
             )
-            _wait_for_input()
+            wait_for_input()
 
 
 def _bio2_instruct() -> None:
@@ -233,7 +234,7 @@ def _bio2_instruct() -> None:
     bottom, under the column "Description", enter "Parent" in a new row.
     """
     printt(fix_multiline(directions))
-    _wait_for_input()
+    wait_for_input()
 
 
 def _addressee_and_salutation_instruct() -> None:
@@ -243,7 +244,7 @@ def _addressee_and_salutation_instruct() -> None:
     pick the fifth option provided from the drop-down.
     """
     printt(fix_multiline(directions))
-    _wait_for_input()
+    wait_for_input()
 
 
 def _relationships_instruct(data: CommonData) -> None:
@@ -268,30 +269,7 @@ def _relationships_instruct(data: CommonData) -> None:
     printt(data.get_field_like(CommonFieldNames.STATE), style="bold blue", end=", ")
     printt(data.get_field_like(CommonFieldNames.ZIP), style="bold blue")
 
-    _wait_for_input()
-
-
-def _wait_for_input() -> None:
-    """
-    Prints a prompt stating that the program
-    is waiting for Enter to be pressed
-    and halts the program. Clears the screen after
-    it is pressed.
-    """
-
-    input("\nPress Enter to continue")
-    click.clear()
-
-
-def _wait_for_confirmation() -> bool:
-    """
-    Returns True if the user entered Y. If the
-    user entered anything else, returns False.
-    """
-
-    response = input()
-    click.clear()
-    return response in ["Y", "y", "yes"]
+    wait_for_input()
 
 
 def fix_multiline(old: str) -> str:
