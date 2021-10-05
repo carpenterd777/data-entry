@@ -11,7 +11,6 @@ import pathlib
 from typing import List
 
 from exceptions import DataEntryHelperException
-from instruct_module import instruct
 from display import page_through
 
 
@@ -52,22 +51,13 @@ def main() -> None:
         description="Step-by-step instructions on what data to enter into the database."
     )
     parser.add_argument("path", type=str, help="path to the csv file containing info")
-    parser.add_argument(
-        "--page_only",
-        action="store_true",
-        help="only page through the input data, no instructions",
-    )
     args = parser.parse_args()
     path_as_string: str = args.path
-    page_only: bool = args.page_only
 
     try:
         path = validate_path(path_as_string)
         data = get_data(path)
-        if page_only:
-            page_through(data)
-        else:
-            instruct(data)
+        page_through(data)
     except DataEntryHelperException as ex:
         parser.error(ex)
 
