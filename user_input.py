@@ -1,4 +1,8 @@
+"""
+Functions that handle user input.
+"""
 import click
+
 
 def wait_for_input() -> None:
     """
@@ -21,4 +25,3 @@ def wait_for_confirmation() -> bool:
     response = input()
     click.clear()
     return response in ["Y", "y", "yes"]
-
