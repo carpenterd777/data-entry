@@ -4,7 +4,6 @@ in a nice way.
 """
 
 from typing import List
-import json
 
 import click
 import rich
@@ -30,5 +29,5 @@ def _page_one(data: CommonData, remaining: int) -> None:
 
     rich.print("Current entry:\n")
     rich.print(f"Remaining: [red]{remaining}[/red]")
-    rich.print_json(json.dumps(data.data))
+    data.print()
     wait_for_input()

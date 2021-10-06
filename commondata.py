@@ -4,8 +4,10 @@ people data more accessible to generic field
 names.
 """
 
+import json
 from typing import List
 
+import rich
 
 class CommonFieldNames:
     """
@@ -62,6 +64,12 @@ class CommonData:
     def __init__(self, data: dict) -> None:
         self.data = data
 
+    def __repr__(self) -> str:
+        return json.dumps(self.data)
+
+    def __str__(self) -> str:
+        return self.__repr__()
+
     def has_field_like(self, field: str) -> bool:
         """
         Returns True if data has a field
@@ -110,3 +118,9 @@ class CommonData:
             raise Exception("got field name that is not yet handled by CommonData")
 
         return predicted_fields
+
+    def print(self) -> None:
+        """
+        Nicely prints this data.
+        """
+        rich.print_json(str(self))
