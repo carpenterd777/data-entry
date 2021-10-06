@@ -9,6 +9,7 @@ from typing import List
 
 import rich
 
+
 class CommonFieldNames:
     """
     A collection of field names that are

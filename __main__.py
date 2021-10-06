@@ -51,13 +51,25 @@ def main() -> None:
         description="Step-by-step instructions on what data to enter into the database."
     )
     parser.add_argument("path", type=str, help="path to the csv file containing info")
+    parser.add_argument(
+        "-r",
+        "--remaining",
+        type=int,
+        help="start paging at this value of remaining entries",
+    )
     args = parser.parse_args()
     path_as_string: str = args.path
+    remaining: int = args.remaining
 
     try:
         path = validate_path(path_as_string)
         data = get_data(path)
-        page_through(data)
+
+        if remaining is None:
+            remaining = len(data)
+
+        start = len(data) - remaining
+        page_through(data, start)
     except DataEntryHelperException as ex:
         parser.error(ex)
 
